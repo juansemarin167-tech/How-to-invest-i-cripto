@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buy Weather</title>
+  <meta name="description" content="A daily temperature reading for crypto: is now a cold (good) or hot (risky) moment to add to your position?">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="./">Buy weather</a>
+    <nav class="coins" aria-label="Choose a coin" id="coins"></nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-live="polite">
+      <p class="hero-coin" id="heroCoin">Loading market data…</p>
+      <div class="reading">
+        <span class="degrees" id="degrees">–°</span>
+        <div class="verdict">
+          <h1 id="band">Reading the market</h1>
+          <p id="advice">Pulling a year of daily prices and the Fear &amp; Greed index.</p>
+        </div>
+      </div>
+      <div class="thermo" role="img" id="thermo" aria-label="Temperature scale">
+        <div class="thermo-bar"></div>
+        <div class="thermo-marker" id="marker"></div>
+      </div>
+      <ol class="scale" aria-hidden="true">
+        <li>Freezing</li><li>Cold</li><li>Mild</li><li>Warm</li><li>Hot</li>
+      </ol>
+      <p class="price-line" id="priceLine"></p>
+    </section>
+
+    <div class="error" id="error" hidden>
+      <p id="errorText"></p>
+      <button type="button" id="retry">Try again</button>
+    </div>
+
+    <section class="drivers" aria-labelledby="driversTitle">
+      <h2 id="driversTitle">What's driving today's reading</h2>
+      <p class="lede">Four signals, each scored from 0 (cold, cheap) to 100 (hot, stretched). The temperature is their weighted average.</p>
+      <ul class="driver-list" id="drivers"></ul>
+    </section>
+
+    <section class="history" aria-labelledby="historyTitle">
+      <h2 id="historyTitle">The last year, one stripe per day</h2>
+      <p class="lede">Blue stripes were cold days, red were hot. Hover or tap the chart to see any day.</p>
+      <div class="chart-wrap">
+        <svg id="chart" role="img" aria-label="Price chart with daily temperature stripes"></svg>
+        <div class="tip" id="tip" hidden></div>
+      </div>
+      <p class="legend"><span class="key price"></span>Price <span class="key sma"></span>200‑day average</p>
+    </section>
+
+    <section class="plan" aria-labelledby="planTitle">
+      <h2 id="planTitle">Plan your next buy</h2>
+      <p class="lede">Keep buying on a schedule, but let the temperature size each buy: more when it's cold, less when it's hot.</p>
+      <form class="plan-form" id="planForm">
+        <label>Your usual amount (USD)
+          <input type="number" id="amount" min="1" step="1" value="100" inputmode="numeric">
+        </label>
+        <label>How often you buy
+          <select id="freq">
+            <option value="7">Every week</option>
+            <option value="14">Every two weeks</option>
+            <option value="30">Every month</option>
+          </select>
+        </label>
+      </form>
+      <p class="next-buy" id="nextBuy"></p>
+
+      <h3>How this would have done over the last year</h3>
+      <p class="lede">Same schedule, two approaches, priced at each day's close. Past results don't promise future ones.</p>
+      <div class="table-wrap">
+        <table class="backtest">
+          <thead>
+            <tr><th scope="col"></th><th scope="col">Fixed</th><th scope="col">Sized by temp</th></tr>
+          </thead>
+          <tbody id="backtest"></tbody>
+        </table>
+      </div>
+      <p class="note" id="backtestNote"></p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p><strong>This is not financial advice.</strong> Nobody can call the exact bottom. This tool reads where price sits against its own history and market mood, which helps you avoid buying into euphoria and lean in during fear. Crypto can fall far further than any signal suggests. Only invest what you can afford to lose.</p>
+    <p class="sources">Prices from Binance public market data (CoinGecko as backup). Sentiment from the alternative.me Fear &amp; Greed index. <span id="updated"></span></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
