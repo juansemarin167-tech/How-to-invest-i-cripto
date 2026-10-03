@@ -27,6 +27,8 @@ python3 -m http.server 8000
 
 To publish, enable GitHub Pages on this branch (root folder).
 
+`artifact/buy-weather.html` is a single-file copy of the site (CSS and JS inlined) published as a Claude artifact: https://claude.ai/artifact/3afSR29eDetBaXga78j2Hh. The artifact viewer blocks outside requests, so that copy falls back to clearly labelled example data there; opened anywhere else it uses live prices.
+
 Data: Binance public market data (`data-api.binance.vision`), CoinGecko as backup, alternative.me Fear & Greed index. All free and keyless.
 
 **Not financial advice.** The signals describe where price sits against its own history; they can't predict the future.
